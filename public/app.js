@@ -126,14 +126,19 @@
 
     function updateWaitingPlayers(players) {
         const container = document.getElementById('waitingPlayers');
-        container.innerHTML = players.map(p => `
+        container.innerHTML = players.map(p => {
+            const inner = p.avatar.customImage
+                ? `<img class="custom-av" src="${p.avatar.customImage}" alt="avatar">`
+                : p.avatar.emoji;
+            return `
       <div class="waiting-player">
         <div class="waiting-avatar" style="background:linear-gradient(135deg, ${p.avatar.color}, ${adjustColor(p.avatar.color, -30)})">
-          ${p.avatar.emoji}
+          ${inner}
         </div>
         <span class="waiting-player-name">${escapeHtml(p.name)}</span>
       </div>
-    `).join('');
+    `;
+        }).join('');
     }
 
     // Copy room link
@@ -397,16 +402,21 @@
             if (top3[0]) podiumOrder.push({ ...top3[0], position: 1 });
             if (top3[2]) podiumOrder.push({ ...top3[2], position: 3 });
 
-            podium.innerHTML = podiumOrder.map(p => `
+            podium.innerHTML = podiumOrder.map(p => {
+                const inner = p.avatar.customImage
+                    ? `<img class="custom-av" src="${p.avatar.customImage}" alt="avatar">`
+                    : p.avatar.emoji;
+                return `
         <div class="podium-place">
           <span class="podium-rank">${p.position === 1 ? '🥇' : p.position === 2 ? '🥈' : '🥉'}</span>
           <div class="podium-avatar" style="background:linear-gradient(135deg, ${p.avatar.color}, ${adjustColor(p.avatar.color, -30)})">
-            ${p.avatar.emoji}
+            ${inner}
           </div>
           <span class="podium-name">${escapeHtml(p.name)}</span>
           <span class="podium-score">${p.score} pts</span>
         </div>
-      `).join('');
+      `;
+            }).join('');
 
             // Rankings list (4th+)
             const rankingsList = document.getElementById('rankingsList');
@@ -474,7 +484,6 @@
         });
     }
 
-    // ============ PLAYERS LIST ============
     function updatePlayersList(players) {
         const container = document.getElementById('playersList');
         if (!container) return;
@@ -488,10 +497,14 @@
             if (p.isDrawing) classes += ' is-drawing';
             if (p.guessedCorrectly) classes += ' guessed-correct';
 
+            const inner = p.avatar.customImage
+                ? `<img class="custom-av" src="${p.avatar.customImage}" alt="avatar">`
+                : p.avatar.emoji;
+
             return `
         <div class="${classes}">
           <div class="player-avatar" style="background:linear-gradient(135deg, ${p.avatar.color}, ${adjustColor(p.avatar.color, -30)})">
-            ${p.avatar.emoji}
+            ${inner}
           </div>
           <div class="player-info">
             <div class="player-name">${escapeHtml(p.name)}</div>

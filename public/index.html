@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Skribble — Draw & Guess</title>
-  <meta name="description" content="Free multiplayer drawing and guessing game. Create a room, invite friends, and let the fun begin!">
+  <meta name="description"
+    content="Free multiplayer drawing and guessing game. Create a room, invite friends, and let the fun begin!">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <div class="home-container">
     <!-- Animated background -->
@@ -35,6 +39,7 @@
           <div class="avatar-display" id="avatarDisplay">
             <div class="avatar-circle" id="avatarCircle">
               <span class="avatar-emoji" id="avatarEmoji">😀</span>
+              <img class="avatar-custom-img hidden" id="avatarCustomImg" alt="Custom avatar">
             </div>
             <div class="avatar-controls">
               <button class="avatar-btn" id="prevAvatar" aria-label="Previous avatar">‹</button>
@@ -52,9 +57,13 @@
             <button class="color-dot" data-color="#FD79A8" style="background:#FD79A8"></button>
           </div>
         </div>
+        <button class="btn btn-draw-avatar" id="btnDrawAvatar">
+          <span class="btn-icon">🎨</span> Draw Your Avatar
+        </button>
 
         <div class="input-group">
-          <input type="text" id="nameInput" class="name-input" placeholder="Enter your name..." maxlength="16" autocomplete="off" spellcheck="false">
+          <input type="text" id="nameInput" class="name-input" placeholder="Enter your name..." maxlength="16"
+            autocomplete="off" spellcheck="false">
         </div>
 
         <div class="action-buttons">
@@ -69,7 +78,8 @@
         <div class="join-section">
           <div class="divider"><span>or join a room</span></div>
           <div class="join-row">
-            <input type="text" id="roomCodeInput" class="room-code-input" placeholder="Room Code" maxlength="6" autocomplete="off" spellcheck="false">
+            <input type="text" id="roomCodeInput" class="room-code-input" placeholder="Room Code" maxlength="6"
+              autocomplete="off" spellcheck="false">
             <button class="btn btn-accent" id="btnJoinRoom">Join</button>
           </div>
         </div>
@@ -85,13 +95,60 @@
     <footer class="home-footer">
       <p>Made with ❤️ | A Skribbl.io Clone</p>
     </footer>
+
+    <!-- Avatar Drawing Modal -->
+    <div class="avatar-modal-overlay hidden" id="avatarModalOverlay">
+      <div class="glass-card avatar-modal">
+        <h2 class="avatar-modal-title">🎨 Draw Your Avatar</h2>
+        <div class="avatar-canvas-container">
+          <canvas id="avatarCanvas" width="96" height="96"></canvas>
+        </div>
+        <div class="avatar-toolbar">
+          <div class="avatar-palette">
+            <button class="av-color active" data-color="#000000" style="background:#000000"></button>
+            <button class="av-color" data-color="#FFFFFF" style="background:#FFFFFF;border:1px solid #555"></button>
+            <button class="av-color" data-color="#FF0000" style="background:#FF0000"></button>
+            <button class="av-color" data-color="#FF6600" style="background:#FF6600"></button>
+            <button class="av-color" data-color="#FFD700" style="background:#FFD700"></button>
+            <button class="av-color" data-color="#00CC00" style="background:#00CC00"></button>
+            <button class="av-color" data-color="#0066FF" style="background:#0066FF"></button>
+            <button class="av-color" data-color="#6600CC" style="background:#6600CC"></button>
+            <button class="av-color" data-color="#FF66FF" style="background:#FF66FF"></button>
+            <button class="av-color" data-color="#804000" style="background:#804000"></button>
+            <button class="av-color" data-color="#FFB6A0" style="background:#FFB6A0"></button>
+            <button class="av-color" data-color="#808080" style="background:#808080"></button>
+          </div>
+          <div class="avatar-tools-row">
+            <button class="av-tool active" id="avBrush" title="Brush">🖌️</button>
+            <button class="av-tool" id="avEraser" title="Eraser">◻️</button>
+            <button class="av-tool av-danger" id="avClear" title="Clear">🗑️</button>
+            <div class="av-size-group">
+              <button class="av-size active" data-size="1"><span class="av-size-dot"
+                  style="width:4px;height:4px"></span></button>
+              <button class="av-size" data-size="2"><span class="av-size-dot"
+                  style="width:6px;height:6px"></span></button>
+              <button class="av-size" data-size="4"><span class="av-size-dot"
+                  style="width:10px;height:10px"></span></button>
+              <button class="av-size" data-size="6"><span class="av-size-dot"
+                  style="width:14px;height:14px"></span></button>
+            </div>
+          </div>
+        </div>
+        <div class="avatar-modal-actions">
+          <button class="btn btn-secondary" id="avCancel">Cancel</button>
+          <button class="btn btn-primary" id="avSave"><span class="btn-icon">✅</span> Save Avatar</button>
+        </div>
+        <button class="btn btn-secondary av-reset-btn" id="avResetToEmoji">↩ Reset to Emoji</button>
+      </div>
+    </div>
   </div>
 
   <script>
     // ============ AVATAR SYSTEM ============
-    const avatarEmojis = ['😀','😎','🤠','🥳','😈','👻','🤖','👽','🦊','🐱','🐶','🐸','🦄','🐧','🐼','🦋','🐲','🎃'];
+    const avatarEmojis = ['😀', '😎', '🤠', '🥳', '😈', '👻', '🤖', '👽', '🦊', '🐱', '🐶', '🐸', '🦄', '🐧', '🐼', '🦋', '🐲', '🎃'];
     let currentAvatarIndex = 0;
     let currentColor = '#6C5CE7';
+    let customAvatarData = null; // data URL of drawn avatar
 
     const avatarEmoji = document.getElementById('avatarEmoji');
     const avatarCircle = document.getElementById('avatarCircle');
@@ -122,13 +179,13 @@
     });
 
     function adjustColor(hex, amount) {
-      let r = parseInt(hex.slice(1,3), 16);
-      let g = parseInt(hex.slice(3,5), 16);
-      let b = parseInt(hex.slice(5,7), 16);
+      let r = parseInt(hex.slice(1, 3), 16);
+      let g = parseInt(hex.slice(3, 5), 16);
+      let b = parseInt(hex.slice(5, 7), 16);
       r = Math.max(0, Math.min(255, r + amount));
       g = Math.max(0, Math.min(255, g + amount));
       b = Math.max(0, Math.min(255, b + amount));
-      return `#${r.toString(16).padStart(2,'0')}${g.toString(16).padStart(2,'0')}${b.toString(16).padStart(2,'0')}`;
+      return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
     }
 
     // ============ HELPERS ============
@@ -145,13 +202,14 @@
         showError('Please enter a name!');
         return null;
       }
-      return {
-        name,
-        avatar: {
-          emoji: avatarEmojis[currentAvatarIndex],
-          color: currentColor
-        }
+      const avatarObj = {
+        emoji: avatarEmojis[currentAvatarIndex],
+        color: currentColor
       };
+      if (customAvatarData) {
+        avatarObj.customImage = customAvatarData;
+      }
+      return { name, avatar: avatarObj };
     }
 
     // ============ ACTIONS — No socket on home page! ============
@@ -205,6 +263,138 @@
     document.getElementById('roomCodeInput').addEventListener('input', (e) => {
       e.target.value = e.target.value.toUpperCase();
     });
+
+    // ============ AVATAR DRAWING MODAL ============
+    const avCanvas = document.getElementById('avatarCanvas');
+    const avCtx = avCanvas.getContext('2d');
+    let avDrawing = false;
+    let avColor = '#000000';
+    let avSize = 1;
+    let avTool = 'brush'; // brush | eraser
+    let avLastX = 0, avLastY = 0;
+
+    // Init white background
+    function avClear() {
+      avCtx.fillStyle = '#FFFFFF';
+      avCtx.fillRect(0, 0, avCanvas.width, avCanvas.height);
+    }
+    avClear();
+
+    // Open modal
+    document.getElementById('btnDrawAvatar').addEventListener('click', () => {
+      document.getElementById('avatarModalOverlay').classList.remove('hidden');
+      if (!customAvatarData) avClear();
+    });
+
+    // Close modal
+    document.getElementById('avCancel').addEventListener('click', () => {
+      document.getElementById('avatarModalOverlay').classList.add('hidden');
+    });
+
+    // Save avatar
+    document.getElementById('avSave').addEventListener('click', () => {
+      customAvatarData = avCanvas.toDataURL('image/png');
+      // Show custom avatar preview on the main circle
+      const img = document.getElementById('avatarCustomImg');
+      img.src = customAvatarData;
+      img.classList.remove('hidden');
+      document.getElementById('avatarEmoji').classList.add('hidden');
+      document.getElementById('avatarModalOverlay').classList.add('hidden');
+    });
+
+    // Reset to emoji
+    document.getElementById('avResetToEmoji').addEventListener('click', () => {
+      customAvatarData = null;
+      document.getElementById('avatarCustomImg').classList.add('hidden');
+      document.getElementById('avatarEmoji').classList.remove('hidden');
+      avClear();
+      document.getElementById('avatarModalOverlay').classList.add('hidden');
+    });
+
+    // Clear canvas
+    document.getElementById('avClear').addEventListener('click', avClear);
+
+    // Colors
+    document.querySelectorAll('.av-color').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.av-color').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        avColor = btn.dataset.color;
+        if (avTool === 'eraser') {
+          avTool = 'brush';
+          document.getElementById('avBrush').classList.add('active');
+          document.getElementById('avEraser').classList.remove('active');
+        }
+      });
+    });
+
+    // Sizes
+    document.querySelectorAll('.av-size').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.av-size').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        avSize = parseInt(btn.dataset.size);
+      });
+    });
+
+    // Tools
+    document.getElementById('avBrush').addEventListener('click', () => {
+      avTool = 'brush';
+      document.getElementById('avBrush').classList.add('active');
+      document.getElementById('avEraser').classList.remove('active');
+    });
+    document.getElementById('avEraser').addEventListener('click', () => {
+      avTool = 'eraser';
+      document.getElementById('avEraser').classList.add('active');
+      document.getElementById('avBrush').classList.remove('active');
+    });
+
+    // Drawing on avatar canvas
+    function avGetCoords(e) {
+      const rect = avCanvas.getBoundingClientRect();
+      const scaleX = avCanvas.width / rect.width;
+      const scaleY = avCanvas.height / rect.height;
+      let cx, cy;
+      if (e.touches) { cx = e.touches[0].clientX; cy = e.touches[0].clientY; }
+      else { cx = e.clientX; cy = e.clientY; }
+      return { x: (cx - rect.left) * scaleX, y: (cy - rect.top) * scaleY };
+    }
+
+    avCanvas.addEventListener('mousedown', (e) => {
+      avDrawing = true;
+      const c = avGetCoords(e);
+      avLastX = c.x; avLastY = c.y;
+      const col = avTool === 'eraser' ? '#FFFFFF' : avColor;
+      const sz = avTool === 'eraser' ? avSize * 2 : avSize;
+      avCtx.beginPath();
+      avCtx.arc(c.x, c.y, sz / 2, 0, Math.PI * 2);
+      avCtx.fillStyle = col;
+      avCtx.fill();
+    });
+
+    avCanvas.addEventListener('mousemove', (e) => {
+      if (!avDrawing) return;
+      const c = avGetCoords(e);
+      const col = avTool === 'eraser' ? '#FFFFFF' : avColor;
+      const sz = avTool === 'eraser' ? avSize * 2 : avSize;
+      avCtx.beginPath();
+      avCtx.moveTo(avLastX, avLastY);
+      avCtx.lineTo(c.x, c.y);
+      avCtx.strokeStyle = col;
+      avCtx.lineWidth = sz;
+      avCtx.lineCap = 'round';
+      avCtx.stroke();
+      avLastX = c.x; avLastY = c.y;
+    });
+
+    avCanvas.addEventListener('mouseup', () => { avDrawing = false; });
+    avCanvas.addEventListener('mouseleave', () => { avDrawing = false; });
+
+    // Touch support
+    avCanvas.addEventListener('touchstart', (e) => { e.preventDefault(); avCanvas.dispatchEvent(new MouseEvent('mousedown', { clientX: e.touches[0].clientX, clientY: e.touches[0].clientY })); });
+    avCanvas.addEventListener('touchmove', (e) => { e.preventDefault(); avCanvas.dispatchEvent(new MouseEvent('mousemove', { clientX: e.touches[0].clientX, clientY: e.touches[0].clientY })); });
+    avCanvas.addEventListener('touchend', (e) => { e.preventDefault(); avCanvas.dispatchEvent(new MouseEvent('mouseup')); });
   </script>
 </body>
+
 </html>
