@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skribble — Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Animated background -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- ==================== WAITING ROOM OVERLAY ==================== -->
+    <div class="overlay" id="waitingOverlay">
+        <div class="glass-card waiting-card">
+            <h2 class="waiting-title">Waiting Room</h2>
+            <div class="room-code-display">
+                <span class="room-code-label">Room Code:</span>
+                <span class="room-code-value" id="waitingRoomCode">------</span>
+                <button class="copy-btn" id="copyCodeBtn" title="Copy link">📋</button>
+            </div>
+            <div class="waiting-players" id="waitingPlayers"></div>
+            <div class="settings-panel" id="settingsPanel" style="display:none;">
+                <h3>SETTINGS</h3>
+                <div class="setting-row">
+                    <label>Rounds</label>
+                    <div class="setting-control">
+                        <button class="setting-btn" id="roundsDown">−</button>
+                        <span class="setting-value" id="roundsValue">3</span>
+                        <button class="setting-btn" id="roundsUp">+</button>
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <label>Draw Time</label>
+                    <div class="setting-control">
+                        <button class="setting-btn" id="timeDown">−</button>
+                        <span class="setting-value" id="timeValue">80s</span>
+                        <button class="setting-btn" id="timeUp">+</button>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-start hidden" id="btnStartGame">
+                <span class="btn-icon">🚀</span> Start Game
+            </button>
+            <p class="waiting-hint" id="waitingHint">Waiting for host to start...</p>
+        </div>
+    </div>
+
+    <!-- ==================== WORD PICKER OVERLAY ==================== -->
+    <div class="overlay hidden" id="wordPickerOverlay">
+        <div class="glass-card word-picker-card">
+            <h2 class="word-picker-title">Choose a Word!</h2>
+            <div class="word-choices" id="wordChoices"></div>
+        </div>
+    </div>
+
+    <!-- ==================== GAME OVER OVERLAY ==================== -->
+    <div class="overlay hidden" id="gameOverOverlay">
+        <div class="glass-card gameover-card">
+            <h2 class="gameover-title">🏆 Game Over!</h2>
+            <div class="podium" id="podium"></div>
+            <div class="rankings-list" id="rankingsList"></div>
+            <button class="btn btn-primary" id="btnPlayAgain">
+                <span class="btn-icon">🔄</span> Play Again
+            </button>
+        </div>
+    </div>
+
+    <!-- ==================== MAIN GAME UI ==================== -->
+    <div class="game-container hidden" id="gameContainer">
+        <!-- Header -->
+        <div class="game-header">
+            <div class="header-left">
+                <span class="round-info" id="roundInfo">Round 1 / 3</span>
+            </div>
+            <div class="header-center">
+                <div class="word-display">
+                    <span class="word-hint" id="wordHint">_ _ _ _ _</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="timer-circle" id="timerCircle">
+                    <svg viewBox="0 0 44 44">
+                        <circle class="timer-bg" cx="22" cy="22" r="20"></circle>
+                        <circle class="timer-progress" id="timerProgress" cx="22" cy="22" r="20"></circle>
+                    </svg>
+                    <span class="timer-text" id="timerText"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Body -->
+        <div class="game-body">
+            <!-- Left: Players -->
+            <div class="players-sidebar">
+                <div class="players-list" id="playersList"></div>
+            </div>
+
+            <!-- Center: Canvas -->
+            <div class="canvas-area">
+                <div class="canvas-wrapper" id="canvasWrapper">
+                    <canvas id="drawCanvas" width="960" height="720"></canvas>
+                    <!-- Turn end overlay -->
+                    <div class="canvas-overlay hidden" id="turnEndOverlay">
+                        <div class="turn-end-content">
+                            <p class="turn-end-word">The word was: <strong id="revealedWord"></strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Drawing Toolbar -->
+                <div class="toolbar hidden" id="toolbar">
+                    <div class="tool-group colors-group">
+                        <div class="color-palette">
+                            <button class="palette-color active" data-color="#000000"
+                                style="background:#000000"></button>
+                            <button class="palette-color" data-color="#808080" style="background:#808080"></button>
+                            <button class="palette-color" data-color="#401010" style="background:#401010"></button>
+                            <button class="palette-color" data-color="#FF0000" style="background:#FF0000"></button>
+                            <button class="palette-color" data-color="#FF6600" style="background:#FF6600"></button>
+                            <button class="palette-color" data-color="#FFD700" style="background:#FFD700"></button>
+                            <button class="palette-color" data-color="#00CC00" style="background:#00CC00"></button>
+                            <button class="palette-color" data-color="#00CCCC" style="background:#00CCCC"></button>
+                            <button class="palette-color" data-color="#0066FF" style="background:#0066FF"></button>
+                            <button class="palette-color" data-color="#6600CC" style="background:#6600CC"></button>
+                            <button class="palette-color" data-color="#CC00CC" style="background:#CC00CC"></button>
+                            <button class="palette-color" data-color="#FFFFFF"
+                                style="background:#FFFFFF; border:1px solid #444"></button>
+                            <button class="palette-color" data-color="#C0C0C0" style="background:#C0C0C0"></button>
+                            <button class="palette-color" data-color="#804000" style="background:#804000"></button>
+                            <button class="palette-color" data-color="#FF6666" style="background:#FF6666"></button>
+                            <button class="palette-color" data-color="#FF9933" style="background:#FF9933"></button>
+                            <button class="palette-color" data-color="#FFFF66" style="background:#FFFF66"></button>
+                            <button class="palette-color" data-color="#66FF66" style="background:#66FF66"></button>
+                            <button class="palette-color" data-color="#66FFFF" style="background:#66FFFF"></button>
+                            <button class="palette-color" data-color="#6699FF" style="background:#6699FF"></button>
+                            <button class="palette-color" data-color="#9966FF" style="background:#9966FF"></button>
+                            <button class="palette-color" data-color="#FF66FF" style="background:#FF66FF"></button>
+                        </div>
+                    </div>
+                    <div class="tool-group tools-group">
+                        <div class="tool-row">
+                            <button class="tool-btn active" id="toolBrush" title="Brush">🖌️</button>
+                            <button class="tool-btn" id="toolEraser" title="Eraser">◻️</button>
+                            <button class="tool-btn" id="toolFill" title="Fill">🪣</button>
+                        </div>
+                        <div class="tool-row">
+                            <button class="size-btn" data-size="2"><span class="size-dot"
+                                    style="width:4px;height:4px"></span></button>
+                            <button class="size-btn active" data-size="5"><span class="size-dot"
+                                    style="width:8px;height:8px"></span></button>
+                            <button class="size-btn" data-size="10"><span class="size-dot"
+                                    style="width:12px;height:12px"></span></button>
+                            <button class="size-btn" data-size="20"><span class="size-dot"
+                                    style="width:16px;height:16px"></span></button>
+                        </div>
+                        <div class="tool-row">
+                            <button class="tool-btn" id="toolUndo" title="Undo">↩️</button>
+                            <button class="tool-btn tool-danger" id="toolClear" title="Clear">🗑️</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Chat -->
+            <div class="chat-sidebar">
+                <div class="chat-messages" id="chatMessages"></div>
+                <div class="chat-input-wrapper">
+                    <input type="text" class="chat-input" id="chatInput" placeholder="Type your guess here..."
+                        maxlength="80" autocomplete="off" spellcheck="false">
+                    <button class="chat-send-btn" id="chatSendBtn">📨</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
