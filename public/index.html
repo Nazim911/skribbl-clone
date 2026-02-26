@@ -4,16 +4,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
   <title>Skribble — Draw & Guess</title>
   <meta name="description"
     content="Free multiplayer drawing and guessing game. Create a room, invite friends, and let the fun begin!">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+=======
+  <title>Pixelated — Draw & Guess</title>
+  <meta name="description" content="Free multiplayer drawing and guessing game in a pixel-art style.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 
+<<<<<<< HEAD
 <body>
   <div class="home-container">
     <!-- Animated background -->
@@ -81,10 +91,79 @@
             <input type="text" id="roomCodeInput" class="room-code-input" placeholder="Room Code" maxlength="6"
               autocomplete="off" spellcheck="false">
             <button class="btn btn-accent" id="btnJoinRoom">Join</button>
+=======
+<body class="bg-pixel-grid">
+  <div class="home-container">
+    <main class="home-main">
+      <!-- Logo -->
+      <div class="logo-section">
+        <h1 class="pixel-logo">DRAWZY</h1>
+        <p class="tagline">DRAW • GUESS • WIN</p>
+      </div>
+
+      <!-- Player Setup Card -->
+      <div class="pixel-border-chunky setup-card">
+        <div class="setup-top">
+          <!-- Avatar Column -->
+          <div class="avatar-column">
+            <div class="avatar-nav">
+              <button class="pixel-button" id="prevAvatar" aria-label="Previous avatar">
+                <span class="material-symbols-outlined">chevron_left</span>
+              </button>
+              <div class="avatar-frame" id="avatarCircle">
+                <span class="avatar-emoji" id="avatarEmoji">🎨</span>
+                <img class="avatar-custom-img hidden" id="avatarCustomImg" alt="Custom avatar">
+              </div>
+              <button class="pixel-button" id="nextAvatar" aria-label="Next avatar">
+                <span class="material-symbols-outlined">chevron_right</span>
+              </button>
+            </div>
+            <div class="color-picker-grid">
+              <button class="color-swatch active" data-color="#FFB085" style="background:#FFB085"></button>
+              <button class="color-swatch" data-color="#F2789F" style="background:#F2789F"></button>
+              <button class="color-swatch" data-color="#8D8078" style="background:#8D8078"></button>
+              <button class="color-swatch" data-color="#4A403A" style="background:#4A403A"></button>
+              <button class="color-swatch" data-color="#FFF5E4" style="background:#FFF5E4"></button>
+              <button class="color-swatch" data-color="#EE6983" style="background:#EE6983"></button>
+              <button class="color-swatch" data-color="#CBE4F9" style="background:#CBE4F9"></button>
+              <button class="color-swatch" data-color="#CDF0EA" style="background:#CDF0EA"></button>
+            </div>
+          </div>
+
+          <!-- Form Column -->
+          <div class="form-column">
+            <label for="nameInput">PLAYER NAME</label>
+            <input type="text" id="nameInput" class="pixel-input" placeholder="GUEST_123" maxlength="12"
+              autocomplete="off" spellcheck="false">
+            <button class="pixel-button pixel-button-grey" id="btnDrawAvatar" style="height:56px;">
+              <span class="material-symbols-outlined" style="margin-right:12px;">brush</span> DRAW AVATAR
+            </button>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-grid">
+          <button class="pixel-button" id="btnPlay">
+            <span class="material-symbols-outlined" style="margin-right:12px;">play_arrow</span> QUICK START
+          </button>
+          <button class="pixel-button pixel-button-secondary" id="btnCreateRoom">
+            <span class="material-symbols-outlined" style="margin-right:12px;">sports_esports</span> PRIVATE LOBBY
+          </button>
+        </div>
+
+        <!-- Join Section -->
+        <div class="join-section">
+          <p class="join-label">ALREADY HAVE A CODE?</p>
+          <div class="join-row">
+            <input type="text" id="roomCodeInput" class="pixel-input" placeholder="PX-000" maxlength="6"
+              autocomplete="off" spellcheck="false">
+            <button class="pixel-button" id="btnJoinRoom">JOIN</button>
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
           </div>
         </div>
       </div>
 
+<<<<<<< HEAD
       <!-- Error toast -->
       <div class="toast" id="errorToast">
         <span class="toast-icon">⚠️</span>
@@ -139,16 +218,96 @@
           <button class="btn btn-primary" id="avSave"><span class="btn-icon">✅</span> Save Avatar</button>
         </div>
         <button class="btn btn-secondary av-reset-btn" id="avResetToEmoji">↩ Reset to Emoji</button>
+=======
+      <!-- Footer -->
+      <footer class="home-footer">
+        <div class="footer-links">
+          <span>HOW TO PLAY</span>
+          <span>SETTINGS</span>
+        </div>
+        <p>VER 2.4.0 — BUILT WITH PIXELS</p>
+      </footer>
+    </main>
+
+    <!-- Error toast -->
+    <div class="toast hidden" id="errorToast">
+      <span id="errorMessage"></span>
+    </div>
+
+    <!-- Avatar Drawing Modal -->
+    <div class="avatar-modal-overlay hidden" id="avatarModalOverlay">
+      <div class="pixel-border-chunky avatar-modal">
+        <div class="avatar-modal-header">
+          <h2>PIXEL EDITOR</h2>
+          <button class="avatar-modal-close" id="avCancel">&times;</button>
+        </div>
+        <div class="avatar-canvas-container">
+          <div class="pixel-border-chunky avatar-canvas-frame">
+            <canvas id="avatarCanvas" width="96" height="96"></canvas>
+          </div>
+        </div>
+        <div class="avatar-toolbar">
+          <div class="avatar-palette">
+            <button class="color-swatch active" data-color="#000000" style="background:#000000"></button>
+            <button class="color-swatch" data-color="#FFFFFF" style="background:#FFFFFF"></button>
+            <button class="color-swatch" data-color="#FFB085" style="background:#FFB085"></button>
+            <button class="color-swatch" data-color="#F2789F" style="background:#F2789F"></button>
+            <button class="color-swatch" data-color="#8D8078" style="background:#8D8078"></button>
+            <button class="color-swatch" data-color="#4A403A" style="background:#4A403A"></button>
+            <button class="color-swatch" data-color="#FF0000" style="background:#FF0000"></button>
+            <button class="color-swatch" data-color="#00FF00" style="background:#00FF00"></button>
+            <button class="color-swatch" data-color="#0000FF" style="background:#0000FF"></button>
+          </div>
+          <div class="avatar-tools-row">
+            <button class="pixel-button pixel-button-grey" id="avBrush">
+              <span class="material-symbols-outlined">brush</span>
+            </button>
+            <button class="pixel-button pixel-button-grey" id="avEraser">
+              <span class="material-symbols-outlined">ink_eraser</span>
+            </button>
+            <button class="pixel-button pixel-button-grey" id="avFill">
+              <span class="material-symbols-outlined">colors</span>
+            </button>
+            <button class="pixel-button pixel-button-grey" id="avUndo">
+              <span class="material-symbols-outlined">undo</span>
+            </button>
+            <button class="pixel-button pixel-button-grey" id="avClear">
+              <span class="material-symbols-outlined">delete</span>
+            </button>
+          </div>
+          <div class="avatar-tools-row">
+            <button class="av-size active" data-size="1"><span class="av-size-dot"
+                style="width:4px;height:4px"></span></button>
+            <button class="av-size" data-size="2"><span class="av-size-dot"
+                style="width:6px;height:6px"></span></button>
+            <button class="av-size" data-size="4"><span class="av-size-dot"
+                style="width:10px;height:10px"></span></button>
+            <button class="av-size" data-size="6"><span class="av-size-dot"
+                style="width:14px;height:14px"></span></button>
+          </div>
+          <div class="avatar-modal-actions">
+            <button class="pixel-button pixel-button-grey" id="avResetToEmoji">BACK</button>
+            <button class="pixel-button" id="avSave">SAVE</button>
+          </div>
+        </div>
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
       </div>
     </div>
   </div>
 
   <script>
     // ============ AVATAR SYSTEM ============
+<<<<<<< HEAD
     const avatarEmojis = ['😀', '😎', '🤠', '🥳', '😈', '👻', '🤖', '👽', '🦊', '🐱', '🐶', '🐸', '🦄', '🐧', '🐼', '🦋', '🐲', '🎃'];
     let currentAvatarIndex = 0;
     let currentColor = '#6C5CE7';
     let customAvatarData = null; // data URL of drawn avatar
+=======
+    const avatarEmojis = ['🎨', '🎮', '🖌️', '👾', '⭐', '❤️', '🔥', '👑', '🌈', '🍕', '🐱', '🐶', '🦊', '🐸', '🦄', '🐧', '🐼', '🤖'];
+    let currentAvatarIndex = 0;
+    let currentColor = '#FFB085';
+    let customAvatarData = null;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 
     const avatarEmoji = document.getElementById('avatarEmoji');
     const avatarCircle = document.getElementById('avatarCircle');
@@ -156,14 +315,18 @@
     document.getElementById('prevAvatar').addEventListener('click', () => {
       currentAvatarIndex = (currentAvatarIndex - 1 + avatarEmojis.length) % avatarEmojis.length;
       avatarEmoji.textContent = avatarEmojis[currentAvatarIndex];
+<<<<<<< HEAD
       avatarCircle.style.animation = 'none';
       void avatarCircle.offsetHeight;
       avatarCircle.style.animation = 'avatarPop 0.3s ease';
+=======
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     });
 
     document.getElementById('nextAvatar').addEventListener('click', () => {
       currentAvatarIndex = (currentAvatarIndex + 1) % avatarEmojis.length;
       avatarEmoji.textContent = avatarEmojis[currentAvatarIndex];
+<<<<<<< HEAD
       avatarCircle.style.animation = 'none';
       void avatarCircle.offsetHeight;
       avatarCircle.style.animation = 'avatarPop 0.3s ease';
@@ -188,12 +351,34 @@
       return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
     }
 
+=======
+    });
+
+    document.querySelectorAll('.color-swatch').forEach(dot => {
+      dot.addEventListener('click', () => {
+        const parent = dot.parentElement;
+        parent.querySelectorAll('.color-swatch').forEach(d => d.classList.remove('active'));
+        dot.classList.add('active');
+        currentColor = dot.dataset.color;
+      });
+    });
+
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     // ============ HELPERS ============
     function showError(msg) {
       const toast = document.getElementById('errorToast');
       document.getElementById('errorMessage').textContent = msg;
+<<<<<<< HEAD
       toast.classList.add('show');
       setTimeout(() => toast.classList.remove('show'), 3000);
+=======
+      toast.classList.remove('hidden');
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+        toast.classList.remove('show');
+      }, 3000);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     }
 
     function getPlayerData() {
@@ -212,11 +397,15 @@
       return { name, avatar: avatarObj };
     }
 
+<<<<<<< HEAD
     // ============ ACTIONS — No socket on home page! ============
     // Room creation/joining happens on the game page to avoid the
     // socket disconnect issue when navigating between pages.
 
     // Play button → create room on game page
+=======
+    // ============ ACTIONS ============
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     document.getElementById('btnPlay').addEventListener('click', () => {
       const data = getPlayerData();
       if (!data) return;
@@ -225,7 +414,10 @@
       window.location.href = '/game';
     });
 
+<<<<<<< HEAD
     // Create private room → same as play
+=======
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     document.getElementById('btnCreateRoom').addEventListener('click', () => {
       const data = getPlayerData();
       if (!data) return;
@@ -234,7 +426,10 @@
       window.location.href = '/game';
     });
 
+<<<<<<< HEAD
     // Join room
+=======
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     document.getElementById('btnJoinRoom').addEventListener('click', () => {
       const data = getPlayerData();
       if (!data) return;
@@ -249,17 +444,26 @@
       window.location.href = `/game?room=${code}`;
     });
 
+<<<<<<< HEAD
     // Enter key on room code input
+=======
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     document.getElementById('roomCodeInput').addEventListener('keydown', (e) => {
       if (e.key === 'Enter') document.getElementById('btnJoinRoom').click();
     });
 
+<<<<<<< HEAD
     // Enter key on name input
+=======
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     document.getElementById('nameInput').addEventListener('keydown', (e) => {
       if (e.key === 'Enter') document.getElementById('btnPlay').click();
     });
 
+<<<<<<< HEAD
     // Auto uppercase room code
+=======
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     document.getElementById('roomCodeInput').addEventListener('input', (e) => {
       e.target.value = e.target.value.toUpperCase();
     });
@@ -270,31 +474,53 @@
     let avDrawing = false;
     let avColor = '#000000';
     let avSize = 1;
+<<<<<<< HEAD
     let avTool = 'brush'; // brush | eraser
     let avLastX = 0, avLastY = 0;
 
     // Init white background
+=======
+    let avTool = 'brush'; // brush | eraser | fill
+    let avLastX = 0, avLastY = 0;
+    let avHistory = []; // canvas snapshots for undo
+
+    function avSaveSnapshot() {
+      avHistory.push(avCtx.getImageData(0, 0, avCanvas.width, avCanvas.height));
+    }
+
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     function avClear() {
       avCtx.fillStyle = '#FFFFFF';
       avCtx.fillRect(0, 0, avCanvas.width, avCanvas.height);
     }
     avClear();
 
+<<<<<<< HEAD
     // Open modal
+=======
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     document.getElementById('btnDrawAvatar').addEventListener('click', () => {
       document.getElementById('avatarModalOverlay').classList.remove('hidden');
       if (!customAvatarData) avClear();
     });
 
+<<<<<<< HEAD
     // Close modal
+=======
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     document.getElementById('avCancel').addEventListener('click', () => {
       document.getElementById('avatarModalOverlay').classList.add('hidden');
     });
 
+<<<<<<< HEAD
     // Save avatar
     document.getElementById('avSave').addEventListener('click', () => {
       customAvatarData = avCanvas.toDataURL('image/png');
       // Show custom avatar preview on the main circle
+=======
+    document.getElementById('avSave').addEventListener('click', () => {
+      customAvatarData = avCanvas.toDataURL('image/png');
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
       const img = document.getElementById('avatarCustomImg');
       img.src = customAvatarData;
       img.classList.remove('hidden');
@@ -302,12 +528,16 @@
       document.getElementById('avatarModalOverlay').classList.add('hidden');
     });
 
+<<<<<<< HEAD
     // Reset to emoji
+=======
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     document.getElementById('avResetToEmoji').addEventListener('click', () => {
       customAvatarData = null;
       document.getElementById('avatarCustomImg').classList.add('hidden');
       document.getElementById('avatarEmoji').classList.remove('hidden');
       avClear();
+<<<<<<< HEAD
       document.getElementById('avatarModalOverlay').classList.add('hidden');
     });
 
@@ -318,6 +548,26 @@
     document.querySelectorAll('.av-color').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.av-color').forEach(b => b.classList.remove('active'));
+=======
+      avHistory = [];
+      document.getElementById('avatarModalOverlay').classList.add('hidden');
+    });
+
+    document.getElementById('avClear').addEventListener('click', () => {
+      avSaveSnapshot();
+      avClear();
+    });
+
+    document.getElementById('avUndo').addEventListener('click', () => {
+      if (avHistory.length === 0) return;
+      avCtx.putImageData(avHistory.pop(), 0, 0);
+    });
+
+    // Avatar palette colors
+    document.querySelectorAll('.avatar-palette .color-swatch').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.avatar-palette .color-swatch').forEach(b => b.classList.remove('active'));
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
         btn.classList.add('active');
         avColor = btn.dataset.color;
         if (avTool === 'eraser') {
@@ -338,6 +588,7 @@
     });
 
     // Tools
+<<<<<<< HEAD
     document.getElementById('avBrush').addEventListener('click', () => {
       avTool = 'brush';
       document.getElementById('avBrush').classList.add('active');
@@ -348,6 +599,17 @@
       document.getElementById('avEraser').classList.add('active');
       document.getElementById('avBrush').classList.remove('active');
     });
+=======
+    function setAvTool(tool) {
+      avTool = tool;
+      document.getElementById('avBrush').classList.toggle('active', tool === 'brush');
+      document.getElementById('avEraser').classList.toggle('active', tool === 'eraser');
+      document.getElementById('avFill').classList.toggle('active', tool === 'fill');
+    }
+    document.getElementById('avBrush').addEventListener('click', () => setAvTool('brush'));
+    document.getElementById('avEraser').addEventListener('click', () => setAvTool('eraser'));
+    document.getElementById('avFill').addEventListener('click', () => setAvTool('fill'));
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 
     // Drawing on avatar canvas
     function avGetCoords(e) {
@@ -360,9 +622,51 @@
       return { x: (cx - rect.left) * scaleX, y: (cy - rect.top) * scaleY };
     }
 
+<<<<<<< HEAD
     avCanvas.addEventListener('mousedown', (e) => {
       avDrawing = true;
       const c = avGetCoords(e);
+=======
+    // Flood fill for avatar canvas
+    function avFloodFill(startX, startY, fillColor) {
+      const w = avCanvas.width, h = avCanvas.height;
+      const imageData = avCtx.getImageData(0, 0, w, h);
+      const data = imageData.data;
+      const sx = Math.floor(startX), sy = Math.floor(startY);
+      if (sx < 0 || sx >= w || sy < 0 || sy >= h) return;
+      const tIdx = (sy * w + sx) * 4;
+      const tR = data[tIdx], tG = data[tIdx + 1], tB = data[tIdx + 2];
+      const fR = parseInt(fillColor.slice(1, 3), 16);
+      const fG = parseInt(fillColor.slice(3, 5), 16);
+      const fB = parseInt(fillColor.slice(5, 7), 16);
+      if (tR === fR && tG === fG && tB === fB) return;
+      const tolerance = 30;
+      const stack = [[sx, sy]];
+      const visited = new Set();
+      while (stack.length > 0) {
+        const [x, y] = stack.pop();
+        const key = y * w + x;
+        if (visited.has(key)) continue;
+        if (x < 0 || x >= w || y < 0 || y >= h) continue;
+        const idx = key * 4;
+        if (Math.abs(data[idx] - tR) > tolerance || Math.abs(data[idx + 1] - tG) > tolerance || Math.abs(data[idx + 2] - tB) > tolerance) continue;
+        visited.add(key);
+        data[idx] = fR; data[idx + 1] = fG; data[idx + 2] = fB; data[idx + 3] = 255;
+        stack.push([x + 1, y], [x - 1, y], [x, y + 1], [x, y - 1]);
+      }
+      avCtx.putImageData(imageData, 0, 0);
+    }
+
+    avCanvas.addEventListener('mousedown', (e) => {
+      const c = avGetCoords(e);
+      if (avTool === 'fill') {
+        avSaveSnapshot();
+        avFloodFill(c.x, c.y, avColor);
+        return;
+      }
+      avSaveSnapshot();
+      avDrawing = true;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
       avLastX = c.x; avLastY = c.y;
       const col = avTool === 'eraser' ? '#FFFFFF' : avColor;
       const sz = avTool === 'eraser' ? avSize * 2 : avSize;

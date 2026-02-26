@@ -141,10 +141,16 @@
         }).join('');
     }
 
+<<<<<<< HEAD
     // Copy room link
     document.getElementById('copyCodeBtn').addEventListener('click', () => {
         const link = `${window.location.origin}/game?room=${roomCode}`;
         navigator.clipboard.writeText(link).then(() => {
+=======
+    // Copy room code
+    document.getElementById('copyCodeBtn').addEventListener('click', () => {
+        navigator.clipboard.writeText(roomCode).then(() => {
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
             const btn = document.getElementById('copyCodeBtn');
             btn.textContent = '✅';
             setTimeout(() => { btn.textContent = '📋'; }, 2000);
@@ -559,6 +565,10 @@
             const fillColor = currentColor;
             floodFillAt(Math.floor(coords.x), Math.floor(coords.y), fillColor);
             socket.emit('fill', { x: Math.floor(coords.x), y: Math.floor(coords.y), color: fillColor });
+<<<<<<< HEAD
+=======
+            strokeHistory.push([{ type: 'fill', x: Math.floor(coords.x), y: Math.floor(coords.y), color: fillColor }]);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
             return;
         }
 

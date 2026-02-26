@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* ==================== DESIGN SYSTEM ==================== */
 :root {
     --bg-primary: #0a0a1a;
@@ -20,6 +21,23 @@
     --radius-full: 9999px;
     --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --transition: all 0.2s ease;
+=======
+/* ==================== PIXELATED DESIGN SYSTEM ==================== */
+:root {
+    --peach: #FFB085;
+    --rose: #F2789F;
+    --warm-bg: #FFF5E4;
+    --dark-grey: #4A403A;
+    --mid-grey: #8D8078;
+    --light-grey: #D2CBC6;
+    --border-size: 4px;
+    --accent-green: #4ADE80;
+    --accent-yellow: #FACC15;
+    --accent-red: #EF4444;
+    --accent-blue: #60A5FA;
+    --font: 'Press Start 2P', cursive;
+    --transition: all 0.1s ease;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 * {
@@ -31,13 +49,22 @@
 html,
 body {
     height: 100%;
+<<<<<<< HEAD
     overflow: hidden;
+=======
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 body {
     font-family: var(--font);
+<<<<<<< HEAD
     background: var(--bg-primary);
     color: var(--text-primary);
+=======
+    background-color: var(--warm-bg);
+    color: var(--dark-grey);
+    image-rendering: pixelated;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     -webkit-font-smoothing: antialiased;
 }
 
@@ -45,6 +72,7 @@ body {
     display: none !important;
 }
 
+<<<<<<< HEAD
 /* ==================== ANIMATED BACKGROUND ==================== */
 .bg-orbs {
     position: fixed;
@@ -103,35 +131,190 @@ body {
     66% {
         transform: translate(-30px, 20px) scale(0.9);
     }
+=======
+/* ==================== PIXEL GRID BACKGROUND ==================== */
+.bg-pixel-grid {
+    background-image:
+        linear-gradient(to right, rgba(74, 64, 58, 0.05) 2px, transparent 2px),
+        linear-gradient(to bottom, rgba(74, 64, 58, 0.05) 2px, transparent 2px);
+    background-size: 40px 40px;
+}
+
+/* ==================== PIXEL COMPONENTS ==================== */
+.pixel-border-chunky {
+    border: var(--border-size) solid var(--dark-grey);
+    box-shadow:
+        var(--border-size) var(--border-size) 0px 0px rgba(0, 0, 0, 0.15),
+        inset calc(var(--border-size) * -1) calc(var(--border-size) * -1) 0px 0px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.pixel-button {
+    position: relative;
+    border: var(--border-size) solid var(--dark-grey);
+    background: var(--peach);
+    box-shadow:
+        inset calc(var(--border-size) * -1) calc(var(--border-size) * -1) 0px 0px rgba(0, 0, 0, 0.2),
+        var(--border-size) var(--border-size) 0px 0px rgba(0, 0, 0, 0.1);
+    transition: transform 0.05s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    font-family: var(--font);
+    font-size: 10px;
+    padding: 14px;
+    cursor: pointer;
+    color: var(--dark-grey);
+    line-height: 1.4;
+}
+
+.pixel-button:active {
+    transform: translate(2px, 2px);
+    box-shadow:
+        inset var(--border-size) var(--border-size) 0px 0px rgba(0, 0, 0, 0.2),
+        0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.pixel-button-secondary {
+    background: var(--rose);
+    color: white;
+}
+
+.pixel-button-grey {
+    background: var(--mid-grey);
+    color: white;
+}
+
+.pixel-button-green {
+    background: var(--accent-green);
+    color: var(--dark-grey);
+}
+
+.pixel-button-red {
+    background: var(--accent-red);
+    color: white;
+}
+
+.pixel-input {
+    border: var(--border-size) solid var(--dark-grey);
+    background: white;
+    padding: 12px;
+    font-family: var(--font);
+    font-size: 10px;
+    outline: none;
+    box-shadow: inset 2px 2px 0px 0px rgba(0, 0, 0, 0.05);
+    color: var(--dark-grey);
+    width: 100%;
+}
+
+.pixel-input::placeholder {
+    color: var(--light-grey);
+}
+
+.pixel-input:focus {
+    box-shadow: inset 2px 2px 0px 0px rgba(0, 0, 0, 0.05), 0 0 0 2px var(--peach);
+}
+
+.pixel-logo {
+    font-size: 48px;
+    color: var(--rose);
+    text-shadow: 4px 4px 0px var(--dark-grey);
+}
+
+/* ==================== COLOR SWATCHES ==================== */
+.color-swatch {
+    width: 32px;
+    height: 32px;
+    border: 3px solid var(--dark-grey);
+    cursor: pointer;
+    position: relative;
+    padding: 0;
+    font-size: 0;
+}
+
+.color-swatch.active::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border: 2px solid white;
+}
+
+/* ==================== AVATAR ==================== */
+.avatar-frame {
+    width: 100px;
+    height: 100px;
+    border: var(--border-size) solid var(--dark-grey);
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 4px 4px 0px 0px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.avatar-emoji {
+    font-size: 3rem;
+}
+
+.avatar-custom-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    inset: 0;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 /* ==================== HOME PAGE ==================== */
 .home-container {
+<<<<<<< HEAD
     position: relative;
     min-height: 100vh;
+=======
+    min-height: 100vh;
+    min-height: 100dvh;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+<<<<<<< HEAD
     z-index: 1;
     overflow-y: auto;
 }
 
 .home-main {
+=======
+    padding: 24px;
+}
+
+.home-main {
+    width: 100%;
+    max-width: 672px;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 24px;
+<<<<<<< HEAD
     padding: 20px;
     width: 100%;
     max-width: 440px;
 }
 
 /* Logo */
+=======
+}
+
+/* Header / Logo */
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 .logo-section {
     text-align: center;
 }
 
+<<<<<<< HEAD
 .logo {
     font-size: 3.5rem;
     font-weight: 900;
@@ -398,10 +581,111 @@ body {
     flex: 1;
     height: 1px;
     background: var(--glass-border);
+=======
+.logo-section h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+}
+
+.tagline {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--mid-grey);
+    background: rgba(255, 176, 133, 0.2);
+    padding: 8px 16px;
+    display: inline-block;
+    margin-top: 16px;
+}
+
+/* Setup Card */
+.setup-card {
+    width: 100%;
+    padding: 32px;
+}
+
+.setup-top {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.avatar-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.avatar-nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.avatar-nav .pixel-button {
+    width: 48px;
+    height: 48px;
+    padding: 0;
+}
+
+.color-picker-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.form-column {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.form-column label {
+    font-size: 10px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--mid-grey);
+    margin-bottom: -16px;
+}
+
+.action-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.action-grid .pixel-button {
+    height: 80px;
+    font-size: 12px;
+}
+
+.action-grid .pixel-button .material-symbols-outlined {
+    margin-right: 12px;
+}
+
+/* Join section */
+.join-section {
+    padding-top: 40px;
+    border-top: 4px dashed var(--light-grey);
+}
+
+.join-section .join-label {
+    text-align: center;
+    font-size: 10px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    color: var(--mid-grey);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .join-row {
     display: flex;
+<<<<<<< HEAD
     gap: 10px;
 }
 
@@ -449,6 +733,170 @@ body {
     color: var(--text-muted);
     font-size: 0.8rem;
     z-index: 1;
+=======
+    gap: 16px;
+}
+
+.join-row .pixel-input {
+    flex: 1;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 4px;
+}
+
+.join-row .pixel-button {
+    padding: 14px 40px;
+    height: 56px;
+}
+
+/* Footer */
+.home-footer {
+    font-size: 10px;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--mid-grey);
+    padding: 24px 0 32px;
+}
+
+.home-footer .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 16px;
+}
+
+.home-footer .footer-links span {
+    cursor: pointer;
+}
+
+.home-footer .footer-links span:hover {
+    color: var(--rose);
+}
+
+/* ==================== ERROR TOAST ==================== */
+.toast {
+    position: fixed;
+    top: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: var(--border-size) solid var(--dark-grey);
+    background: #FEE2E2;
+    color: #B91C1C;
+    padding: 12px 24px;
+    font-family: var(--font);
+    font-size: 10px;
+    z-index: 1000;
+    box-shadow: var(--border-size) var(--border-size) 0px 0px rgba(0, 0, 0, 0.15);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.toast.show {
+    opacity: 1;
+}
+
+/* ==================== AVATAR DRAWING MODAL ==================== */
+.avatar-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    padding: 16px;
+}
+
+.avatar-modal {
+    width: 100%;
+    max-width: 512px;
+    padding: 32px;
+}
+
+.avatar-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: var(--border-size) solid var(--dark-grey);
+    padding-bottom: 16px;
+    margin-bottom: 32px;
+}
+
+.avatar-modal-header h2 {
+    font-size: 14px;
+}
+
+.avatar-modal-close {
+    font-size: 24px;
+    font-weight: 700;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--dark-grey);
+    font-family: var(--font);
+    line-height: 1;
+}
+
+.avatar-modal-close:hover {
+    color: var(--rose);
+}
+
+.avatar-canvas-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.avatar-canvas-frame {
+    padding: 4px;
+}
+
+#avatarCanvas {
+    width: 256px;
+    height: 256px;
+    border: 2px solid #F3F4F6;
+    image-rendering: pixelated;
+    cursor: crosshair;
+    display: block;
+}
+
+.avatar-toolbar {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.avatar-palette {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+.avatar-tools-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.avatar-tools-row .pixel-button {
+    padding: 12px;
+}
+
+.avatar-modal-actions {
+    display: flex;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.avatar-modal-actions .pixel-button {
+    flex: 1;
+}
+
+/* ==================== MATERIAL SYMBOLS ==================== */
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 1, 'wght' 700, 'GRAD' 0, 'opsz' 48;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 /* ==================== WAITING ROOM ==================== */
@@ -459,10 +907,25 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 100;
+<<<<<<< HEAD
     background: var(--bg-primary);
     padding: 20px;
 }
 
+=======
+    background: var(--warm-bg);
+    padding: 20px;
+}
+
+.overlay.bg-pixel-grid {
+    background-image:
+        linear-gradient(to right, rgba(74, 64, 58, 0.05) 2px, transparent 2px),
+        linear-gradient(to bottom, rgba(74, 64, 58, 0.05) 2px, transparent 2px);
+    background-size: 40px 40px;
+    background-color: var(--warm-bg);
+}
+
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 .waiting-card {
     padding: 36px;
     width: 100%;
@@ -471,12 +934,19 @@ body {
 }
 
 .waiting-title {
+<<<<<<< HEAD
     font-size: 1.8rem;
     font-weight: 800;
     background: var(--gradient-primary);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+=======
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--rose);
+    text-shadow: 2px 2px 0px var(--dark-grey);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     margin-bottom: 20px;
 }
 
@@ -487,6 +957,7 @@ body {
     gap: 12px;
     margin-bottom: 24px;
     padding: 12px;
+<<<<<<< HEAD
     background: rgba(139, 92, 246, 0.1);
     border-radius: var(--radius-md);
     border: 1px solid rgba(139, 92, 246, 0.2);
@@ -502,6 +973,22 @@ body {
     font-weight: 800;
     letter-spacing: 4px;
     color: var(--accent-purple);
+=======
+    border: 3px solid var(--dark-grey);
+    background: rgba(255, 176, 133, 0.15);
+}
+
+.room-code-label {
+    color: var(--mid-grey);
+    font-size: 10px;
+}
+
+.room-code-value {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: var(--rose);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .copy-btn {
@@ -532,33 +1019,57 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 4px;
+<<<<<<< HEAD
     animation: fadeInUp 0.3s ease;
+=======
+    animation: pixelFadeIn 0.3s ease;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .waiting-avatar {
     width: 48px;
     height: 48px;
+<<<<<<< HEAD
     border-radius: 50%;
+=======
+    border: 3px solid var(--dark-grey);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
+<<<<<<< HEAD
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .waiting-player-name {
     font-size: 0.75rem;
     color: var(--text-secondary);
+=======
+    background: white;
+}
+
+.waiting-player-name {
+    font-size: 8px;
+    color: var(--mid-grey);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     max-width: 70px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
+<<<<<<< HEAD
 @keyframes fadeInUp {
     from {
         opacity: 0;
         transform: translateY(10px);
+=======
+@keyframes pixelFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     }
 
     to {
@@ -574,8 +1085,13 @@ body {
 }
 
 .settings-panel h3 {
+<<<<<<< HEAD
     font-size: 0.9rem;
     color: var(--text-secondary);
+=======
+    font-size: 10px;
+    color: var(--mid-grey);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 12px;
@@ -589,8 +1105,13 @@ body {
 }
 
 .setting-row label {
+<<<<<<< HEAD
     color: var(--text-secondary);
     font-size: 0.95rem;
+=======
+    color: var(--mid-grey);
+    font-size: 10px;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .setting-control {
@@ -602,39 +1123,68 @@ body {
 .setting-btn {
     width: 32px;
     height: 32px;
+<<<<<<< HEAD
     border-radius: 50%;
     border: 1px solid var(--glass-border);
     background: var(--bg-secondary);
     color: var(--text-primary);
     font-size: 1.1rem;
+=======
+    border: 3px solid var(--dark-grey);
+    background: var(--peach);
+    color: var(--dark-grey);
+    font-size: 14px;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+<<<<<<< HEAD
     transition: var(--transition);
 }
 
 .setting-btn:hover {
     background: var(--accent-purple);
     border-color: var(--accent-purple);
+=======
+    font-family: var(--font);
+}
+
+.setting-btn:hover {
+    background: var(--rose);
+    color: white;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .setting-value {
     font-weight: 700;
     min-width: 40px;
     text-align: center;
+<<<<<<< HEAD
+=======
+    font-size: 12px;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .btn-start {
     width: 100%;
+<<<<<<< HEAD
     font-size: 1.1rem;
+=======
+    font-size: 12px;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     padding: 16px;
 }
 
 .waiting-hint {
     margin-top: 12px;
+<<<<<<< HEAD
     color: var(--text-muted);
     font-size: 0.85rem;
+=======
+    color: var(--mid-grey);
+    font-size: 8px;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 /* ==================== WORD PICKER ==================== */
@@ -646,10 +1196,18 @@ body {
 }
 
 .word-picker-title {
+<<<<<<< HEAD
     font-size: 1.6rem;
     font-weight: 800;
     margin-bottom: 28px;
     color: var(--accent-yellow);
+=======
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 28px;
+    color: var(--rose);
+    text-shadow: 2px 2px 0px var(--dark-grey);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .word-choices {
@@ -661,6 +1219,7 @@ body {
 
 .word-choice-btn {
     padding: 16px 32px;
+<<<<<<< HEAD
     border-radius: var(--radius-lg);
     border: 2px solid var(--glass-border);
     background: var(--bg-card);
@@ -693,6 +1252,37 @@ body {
 
 .word-choice-btn:active {
     transform: scale(0.95);
+=======
+    border: var(--border-size) solid var(--dark-grey);
+    background: white;
+    color: var(--dark-grey);
+    font-size: 12px;
+    font-weight: 700;
+    font-family: var(--font);
+    cursor: pointer;
+    transition: all 0.1s ease;
+    min-width: 140px;
+    box-shadow:
+        var(--border-size) var(--border-size) 0px 0px rgba(0, 0, 0, 0.1);
+}
+
+.word-choice-btn:nth-child(1):hover {
+    background: var(--peach);
+}
+
+.word-choice-btn:nth-child(2):hover {
+    background: var(--rose);
+    color: white;
+}
+
+.word-choice-btn:nth-child(3):hover {
+    background: var(--accent-green);
+}
+
+.word-choice-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 /* ==================== GAME OVER ==================== */
@@ -704,6 +1294,7 @@ body {
 }
 
 .gameover-title {
+<<<<<<< HEAD
     font-size: 2rem;
     font-weight: 900;
     margin-bottom: 24px;
@@ -711,6 +1302,13 @@ body {
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+=======
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--rose);
+    text-shadow: 3px 3px 0px var(--dark-grey);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .podium {
@@ -727,7 +1325,11 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 8px;
+<<<<<<< HEAD
     animation: podiumRise 0.6s ease forwards;
+=======
+    animation: pixelFadeIn 0.6s ease forwards;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     opacity: 0;
 }
 
@@ -743,6 +1345,7 @@ body {
     animation-delay: 0.6s;
 }
 
+<<<<<<< HEAD
 @keyframes podiumRise {
     from {
         opacity: 0;
@@ -759,11 +1362,21 @@ body {
     width: 56px;
     height: 56px;
     border-radius: 50%;
+=======
+.podium-avatar {
+    width: 56px;
+    height: 56px;
+    border: 3px solid var(--dark-grey);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.8rem;
+<<<<<<< HEAD
     border: 3px solid transparent;
+=======
+    background: white;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .podium-place:nth-child(1) .podium-avatar {
@@ -771,7 +1384,11 @@ body {
     height: 72px;
     font-size: 2.2rem;
     border-color: #FFD700;
+<<<<<<< HEAD
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+=======
+    box-shadow: 4px 4px 0px 0px rgba(255, 215, 0, 0.4);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .podium-place:nth-child(2) .podium-avatar {
@@ -784,7 +1401,11 @@ body {
 
 .podium-name {
     font-weight: 700;
+<<<<<<< HEAD
     font-size: 0.85rem;
+=======
+    font-size: 8px;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     max-width: 80px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -792,13 +1413,22 @@ body {
 }
 
 .podium-score {
+<<<<<<< HEAD
     font-size: 0.8rem;
     color: var(--accent-yellow);
+=======
+    font-size: 8px;
+    color: var(--rose);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     font-weight: 700;
 }
 
 .podium-rank {
+<<<<<<< HEAD
     font-size: 1.2rem;
+=======
+    font-size: 14px;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .rankings-list {
@@ -810,11 +1440,15 @@ body {
     align-items: center;
     gap: 12px;
     padding: 8px 12px;
+<<<<<<< HEAD
     border-radius: var(--radius-sm);
+=======
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     margin-bottom: 4px;
 }
 
 .ranking-item:nth-child(odd) {
+<<<<<<< HEAD
     background: rgba(255, 255, 255, 0.03);
 }
 
@@ -822,17 +1456,36 @@ body {
     font-weight: 800;
     color: var(--text-muted);
     min-width: 24px;
+=======
+    background: rgba(74, 64, 58, 0.05);
+}
+
+.ranking-pos {
+    font-weight: 700;
+    color: var(--mid-grey);
+    min-width: 24px;
+    font-size: 10px;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .ranking-name {
     flex: 1;
     text-align: left;
     font-weight: 600;
+<<<<<<< HEAD
+=======
+    font-size: 10px;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .ranking-score {
     font-weight: 700;
+<<<<<<< HEAD
     color: var(--accent-yellow);
+=======
+    color: var(--rose);
+    font-size: 10px;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 /* ==================== GAME LAYOUT ==================== */
@@ -840,18 +1493,32 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
+<<<<<<< HEAD
     overflow: hidden;
+=======
+    height: 100dvh;
+    overflow: hidden;
+    background-color: var(--warm-bg);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .game-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+<<<<<<< HEAD
     padding: 4px 12px;
     background: var(--bg-secondary);
     border-bottom: 1px solid var(--glass-border);
     flex-shrink: 0;
     height: 46px;
+=======
+    padding: 6px 12px;
+    background: white;
+    border-bottom: var(--border-size) solid var(--dark-grey);
+    flex-shrink: 0;
+    height: 52px;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .header-left {
@@ -860,11 +1527,19 @@ body {
 
 .round-info {
     font-weight: 700;
+<<<<<<< HEAD
     font-size: 0.9rem;
     color: var(--text-secondary);
     background: rgba(255, 255, 255, 0.05);
     padding: 6px 14px;
     border-radius: var(--radius-full);
+=======
+    font-size: 9px;
+    color: var(--mid-grey);
+    background: rgba(255, 176, 133, 0.2);
+    padding: 6px 14px;
+    border: 2px solid var(--dark-grey);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .header-center {
@@ -874,6 +1549,7 @@ body {
 }
 
 .word-display {
+<<<<<<< HEAD
     background: rgba(255, 255, 255, 0.06);
     padding: 8px 28px;
     border-radius: var(--radius-full);
@@ -887,6 +1563,21 @@ body {
     font-weight: 700;
     letter-spacing: 4px;
     font-family: 'Courier New', monospace;
+=======
+    background: white;
+    padding: 8px 28px;
+    border: 3px solid var(--dark-grey);
+    min-width: 200px;
+    text-align: center;
+    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1);
+}
+
+.word-hint {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    font-family: var(--font);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .header-right {
@@ -907,7 +1598,11 @@ body {
 
 .timer-bg {
     fill: none;
+<<<<<<< HEAD
     stroke: rgba(255, 255, 255, 0.1);
+=======
+    stroke: var(--light-grey);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     stroke-width: 3;
 }
 
@@ -915,7 +1610,11 @@ body {
     fill: none;
     stroke: var(--accent-green);
     stroke-width: 3;
+<<<<<<< HEAD
     stroke-linecap: round;
+=======
+    stroke-linecap: square;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     stroke-dasharray: 125.66;
     stroke-dashoffset: 0;
     transition: stroke-dashoffset 1s linear, stroke 0.5s ease;
@@ -927,8 +1626,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+<<<<<<< HEAD
     font-weight: 800;
     font-size: 0.85rem;
+=======
+    font-weight: 700;
+    font-size: 10px;
+    color: var(--dark-grey);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 /* Game Body */
@@ -940,9 +1645,15 @@ body {
 
 /* Players Sidebar */
 .players-sidebar {
+<<<<<<< HEAD
     width: 170px;
     background: var(--bg-secondary);
     border-right: 1px solid var(--glass-border);
+=======
+    width: 180px;
+    background: white;
+    border-right: var(--border-size) solid var(--dark-grey);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     overflow-y: auto;
     flex-shrink: 0;
 }
@@ -956,6 +1667,7 @@ body {
     align-items: center;
     gap: 10px;
     padding: 8px 10px;
+<<<<<<< HEAD
     border-radius: var(--radius-sm);
     margin-bottom: 4px;
     transition: var(--transition);
@@ -969,17 +1681,43 @@ body {
 
 .player-item.guessed-correct {
     background: rgba(34, 197, 94, 0.1);
+=======
+    margin-bottom: 4px;
+    transition: var(--transition);
+    position: relative;
+    border: 2px solid transparent;
+}
+
+.player-item.is-drawing {
+    background: rgba(242, 120, 159, 0.15);
+    border: 2px solid var(--rose);
+}
+
+.player-item.guessed-correct {
+    background: rgba(74, 222, 128, 0.15);
+    border: 2px solid var(--accent-green);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .player-avatar {
     width: 36px;
     height: 36px;
+<<<<<<< HEAD
     border-radius: 50%;
+=======
+    border: 2px solid var(--dark-grey);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.1rem;
     flex-shrink: 0;
+<<<<<<< HEAD
+=======
+    background: white;
+    position: relative;
+    overflow: hidden;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .player-info {
@@ -988,16 +1726,26 @@ body {
 }
 
 .player-name {
+<<<<<<< HEAD
     font-weight: 600;
     font-size: 0.85rem;
+=======
+    font-weight: 700;
+    font-size: 8px;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .player-score {
+<<<<<<< HEAD
     font-size: 0.75rem;
     color: var(--text-muted);
+=======
+    font-size: 7px;
+    color: var(--mid-grey);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     font-weight: 600;
 }
 
@@ -1013,8 +1761,12 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+<<<<<<< HEAD
     padding: 6px;
     background: var(--bg-primary);
+=======
+    padding: 8px;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     overflow: hidden;
     min-width: 0;
     min-height: 0;
@@ -1023,9 +1775,16 @@ body {
 .canvas-wrapper {
     position: relative;
     background: #FFFFFF;
+<<<<<<< HEAD
     border-radius: var(--radius-md);
     overflow: hidden;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+=======
+    border: var(--border-size) solid var(--dark-grey);
+    overflow: hidden;
+    box-shadow:
+        var(--border-size) var(--border-size) 0px 0px rgba(0, 0, 0, 0.15);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     width: 100%;
     flex: 1;
     min-height: 0;
@@ -1044,8 +1803,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+<<<<<<< HEAD
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(4px);
+=======
+    background: rgba(74, 64, 58, 0.85);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     z-index: 5;
 }
 
@@ -1054,13 +1817,22 @@ body {
 }
 
 .turn-end-word {
+<<<<<<< HEAD
     font-size: 1.5rem;
+=======
+    font-size: 14px;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     color: white;
 }
 
 .turn-end-word strong {
+<<<<<<< HEAD
     color: var(--accent-yellow);
     font-size: 2rem;
+=======
+    color: var(--peach);
+    font-size: 18px;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 /* Toolbar */
@@ -1068,6 +1840,7 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+<<<<<<< HEAD
     padding: 6px 12px;
     background: var(--bg-secondary);
     border-radius: var(--radius-lg);
@@ -1076,6 +1849,16 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     flex-shrink: 0;
+=======
+    padding: 8px 12px;
+    background: white;
+    border: var(--border-size) solid var(--dark-grey);
+    margin-top: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: var(--border-size) var(--border-size) 0px 0px rgba(0, 0, 0, 0.1);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .tool-group {
@@ -1100,10 +1883,17 @@ body {
 .palette-color {
     width: 24px;
     height: 24px;
+<<<<<<< HEAD
     border-radius: 4px;
     border: 2px solid transparent;
     cursor: pointer;
     transition: var(--transition);
+=======
+    border: 2px solid var(--dark-grey);
+    cursor: pointer;
+    transition: var(--transition);
+    padding: 0;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .palette-color:hover {
@@ -1111,9 +1901,15 @@ body {
 }
 
 .palette-color.active {
+<<<<<<< HEAD
     border-color: var(--accent-cyan);
     transform: scale(1.15);
     box-shadow: 0 0 8px rgba(6, 182, 212, 0.4);
+=======
+    border-color: var(--rose);
+    transform: scale(1.15);
+    box-shadow: 0 0 0 2px var(--rose);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .tools-group {
@@ -1131,15 +1927,22 @@ body {
 .tool-btn {
     width: 36px;
     height: 36px;
+<<<<<<< HEAD
     border-radius: var(--radius-sm);
     border: 1px solid var(--glass-border);
     background: rgba(255, 255, 255, 0.05);
     color: var(--text-secondary);
+=======
+    border: 2px solid var(--dark-grey);
+    background: white;
+    color: var(--dark-grey);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: var(--transition);
+<<<<<<< HEAD
 }
 
 .tool-btn:hover {
@@ -1155,6 +1958,23 @@ body {
 
 .tool-danger:hover {
     background: rgba(239, 68, 68, 0.2);
+=======
+    font-size: 1rem;
+}
+
+.tool-btn:hover {
+    background: var(--peach);
+}
+
+.tool-btn.active {
+    background: var(--rose);
+    color: white;
+    border-color: var(--dark-grey);
+}
+
+.tool-danger:hover {
+    background: #FEE2E2;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     color: var(--accent-red);
     border-color: var(--accent-red);
 }
@@ -1162,9 +1982,14 @@ body {
 .size-btn {
     width: 32px;
     height: 32px;
+<<<<<<< HEAD
     border-radius: var(--radius-sm);
     border: 1px solid var(--glass-border);
     background: rgba(255, 255, 255, 0.05);
+=======
+    border: 2px solid var(--dark-grey);
+    background: white;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -1173,6 +1998,7 @@ body {
 }
 
 .size-btn:hover {
+<<<<<<< HEAD
     background: rgba(255, 255, 255, 0.1);
 }
 
@@ -1183,19 +2009,40 @@ body {
 
 .size-dot {
     background: var(--text-secondary);
+=======
+    background: rgba(255, 176, 133, 0.3);
+}
+
+.size-btn.active {
+    border-color: var(--rose);
+    background: rgba(242, 120, 159, 0.2);
+}
+
+.size-dot {
+    background: var(--mid-grey);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     border-radius: 50%;
     display: block;
 }
 
 .size-btn.active .size-dot {
+<<<<<<< HEAD
     background: var(--accent-purple);
+=======
+    background: var(--rose);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 /* Chat Sidebar */
 .chat-sidebar {
     width: 240px;
+<<<<<<< HEAD
     background: var(--bg-secondary);
     border-left: 1px solid var(--glass-border);
+=======
+    background: white;
+    border-left: var(--border-size) solid var(--dark-grey);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
@@ -1212,10 +2059,17 @@ body {
 
 .chat-msg {
     padding: 6px 10px;
+<<<<<<< HEAD
     border-radius: var(--radius-sm);
     font-size: 0.85rem;
     animation: fadeInUp 0.2s ease;
     word-break: break-word;
+=======
+    font-size: 8px;
+    animation: pixelFadeIn 0.2s ease;
+    word-break: break-word;
+    line-height: 1.6;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .chat-msg .msg-name {
@@ -1224,6 +2078,7 @@ body {
 }
 
 .chat-msg.type-message .msg-name {
+<<<<<<< HEAD
     color: var(--text-secondary);
 }
 
@@ -1239,10 +2094,29 @@ body {
 
 .chat-msg.type-close {
     color: var(--accent-yellow);
+=======
+    color: var(--mid-grey);
+}
+
+.chat-msg.type-message .msg-text {
+    color: var(--dark-grey);
+}
+
+.chat-msg.type-correct {
+    background: rgba(74, 222, 128, 0.15);
+    color: #166534;
+    font-weight: 700;
+    border: 2px solid var(--accent-green);
+}
+
+.chat-msg.type-close {
+    color: #92400E;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     font-style: italic;
 }
 
 .chat-msg.type-join {
+<<<<<<< HEAD
     color: var(--accent-cyan);
     font-size: 0.8rem;
 }
@@ -1255,6 +2129,20 @@ body {
 .chat-msg.type-system {
     color: var(--accent-yellow);
     font-weight: 600;
+=======
+    color: var(--accent-blue);
+    font-size: 7px;
+}
+
+.chat-msg.type-leave {
+    color: var(--mid-grey);
+    font-size: 7px;
+}
+
+.chat-msg.type-system {
+    color: var(--rose);
+    font-weight: 700;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     text-align: center;
 }
 
@@ -1262,22 +2150,51 @@ body {
     display: flex;
     gap: 8px;
     padding: 10px;
+<<<<<<< HEAD
     border-top: 1px solid var(--glass-border);
+=======
+    border-top: var(--border-size) solid var(--dark-grey);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .chat-input {
     flex: 1;
+<<<<<<< HEAD
     padding: 10px 14px;
     font-size: 0.9rem;
+=======
+    padding: 10px;
+    font-size: 8px;
+    border: var(--border-size) solid var(--dark-grey);
+    background: white;
+    font-family: var(--font);
+    outline: none;
+    color: var(--dark-grey);
+    min-width: 0;
+}
+
+.chat-input::placeholder {
+    color: var(--light-grey);
+}
+
+.chat-input:focus {
+    box-shadow: 0 0 0 2px var(--peach);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .chat-send-btn {
     width: 40px;
     height: 40px;
+<<<<<<< HEAD
     border-radius: var(--radius-sm);
     border: 1px solid var(--glass-border);
     background: var(--accent-purple);
     color: white;
+=======
+    border: var(--border-size) solid var(--dark-grey);
+    background: var(--peach);
+    color: var(--dark-grey);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     font-size: 1rem;
     cursor: pointer;
     display: flex;
@@ -1288,19 +2205,34 @@ body {
 }
 
 .chat-send-btn:hover {
+<<<<<<< HEAD
     background: #7C3AED;
+=======
+    background: var(--rose);
+    color: white;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 /* Correct guess popup */
 .score-popup {
     position: fixed;
+<<<<<<< HEAD
     font-size: 1.5rem;
     font-weight: 900;
+=======
+    font-size: 16px;
+    font-weight: 700;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     color: var(--accent-green);
     pointer-events: none;
     z-index: 200;
     animation: scoreFloat 1.5s ease forwards;
+<<<<<<< HEAD
     text-shadow: 0 2px 8px rgba(34, 197, 94, 0.5);
+=======
+    text-shadow: 2px 2px 0px var(--dark-grey);
+    font-family: var(--font);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 @keyframes scoreFloat {
@@ -1325,18 +2257,31 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
+<<<<<<< HEAD
     background: rgba(255, 255, 255, 0.15);
     border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.25);
+=======
+    background: var(--light-grey);
+    border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--mid-grey);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 /* ==================== RESPONSIVE ==================== */
 @media (max-width: 1000px) {
     .players-sidebar {
+<<<<<<< HEAD
         width: 140px;
+=======
+        width: 150px;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     }
 
     .chat-sidebar {
@@ -1345,6 +2290,7 @@ body {
 }
 
 @media (max-width: 768px) {
+<<<<<<< HEAD
     .game-container {
         height: 100vh;
         height: 100dvh;
@@ -1357,11 +2303,24 @@ body {
 
     .round-info {
         font-size: 0.75rem;
+=======
+    .game-header {
+        padding: 4px 10px;
+        height: 48px;
+    }
+
+    .round-info {
+        font-size: 7px;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
         padding: 4px 10px;
     }
 
     .word-hint {
+<<<<<<< HEAD
         font-size: 1rem;
+=======
+        font-size: 10px;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
         letter-spacing: 2px;
     }
 
@@ -1376,7 +2335,11 @@ body {
     }
 
     .timer-text {
+<<<<<<< HEAD
         font-size: 0.75rem;
+=======
+        font-size: 8px;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     }
 
     .game-body {
@@ -1390,7 +2353,11 @@ body {
         flex: 0 0 auto;
         max-height: 52px;
         border-right: none;
+<<<<<<< HEAD
         border-bottom: 1px solid var(--glass-border);
+=======
+        border-bottom: var(--border-size) solid var(--dark-grey);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
         overflow: hidden;
     }
 
@@ -1416,6 +2383,7 @@ body {
     }
 
     .player-name {
+<<<<<<< HEAD
         font-size: 0.7rem;
     }
 
@@ -1424,6 +2392,16 @@ body {
     }
 
     /* Canvas: shrink to leave room for chat */
+=======
+        font-size: 6px;
+    }
+
+    .player-score {
+        font-size: 6px;
+    }
+
+    /* Canvas area */
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     .canvas-area {
         flex: 1 1 0;
         min-height: 0;
@@ -1440,7 +2418,10 @@ body {
         padding: 4px 8px;
         gap: 4px;
         margin-top: 4px;
+<<<<<<< HEAD
         border-radius: var(--radius-sm);
+=======
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     }
 
     .palette-color {
@@ -1463,14 +2444,22 @@ body {
         height: 26px;
     }
 
+<<<<<<< HEAD
     /* Chat: guaranteed space at the bottom */
+=======
+    /* Chat: bottom strip */
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     .chat-sidebar {
         width: 100%;
         flex: 0 0 auto;
         min-height: 130px;
         max-height: 180px;
         border-left: none;
+<<<<<<< HEAD
         border-top: 1px solid var(--glass-border);
+=======
+        border-top: var(--border-size) solid var(--dark-grey);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     }
 
     .chat-messages {
@@ -1479,7 +2468,11 @@ body {
     }
 
     .chat-msg {
+<<<<<<< HEAD
         font-size: 0.78rem;
+=======
+        font-size: 7px;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
         padding: 4px 8px;
     }
 
@@ -1489,7 +2482,11 @@ body {
 
     .chat-input {
         padding: 8px 10px;
+<<<<<<< HEAD
         font-size: 0.85rem;
+=======
+        font-size: 8px;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     }
 
     .chat-send-btn {
@@ -1497,10 +2494,15 @@ body {
         height: 34px;
     }
 
+<<<<<<< HEAD
+=======
+    /* Home page mobile */
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     .home-main {
         max-width: 100%;
     }
 
+<<<<<<< HEAD
     .logo {
         font-size: 2.5rem;
     }
@@ -1510,6 +2512,38 @@ body {
 @media (max-height: 600px) and (max-width: 768px) {
     .game-header {
         height: 36px;
+=======
+    .pixel-logo {
+        font-size: 32px;
+    }
+
+    .logo-section h1 {
+        font-size: 2rem;
+    }
+
+    .setup-top {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .action-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .join-row {
+        flex-direction: column;
+    }
+
+    .setup-card {
+        padding: 20px;
+    }
+}
+
+/* Extra small screens */
+@media (max-height: 600px) and (max-width: 768px) {
+    .game-header {
+        height: 40px;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     }
 
     .players-sidebar {
@@ -1536,6 +2570,7 @@ body {
     }
 }
 
+<<<<<<< HEAD
 /* ==================== CUSTOM AVATAR ==================== */
 .avatar-custom-img {
     width: 100%;
@@ -1632,6 +2667,25 @@ body {
     border: 2px solid transparent;
     cursor: pointer;
     transition: var(--transition);
+=======
+/* ==================== CUSTOM AVATAR IN GAME ==================== */
+.player-avatar img.custom-av,
+.waiting-avatar img.custom-av,
+.podium-avatar img.custom-av {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Avatar tools — used in avatar modal */
+.av-color {
+    width: 26px;
+    height: 26px;
+    border: 2px solid var(--dark-grey);
+    cursor: pointer;
+    transition: var(--transition);
+    padding: 0;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .av-color:hover {
@@ -1639,6 +2693,7 @@ body {
 }
 
 .av-color.active {
+<<<<<<< HEAD
     border-color: var(--accent-cyan);
     transform: scale(1.1);
     box-shadow: 0 0 6px rgba(6, 182, 212, 0.4);
@@ -1650,15 +2705,26 @@ body {
     justify-content: center;
     gap: 8px;
     flex-wrap: wrap;
+=======
+    border-color: var(--rose);
+    transform: scale(1.1);
+    box-shadow: 0 0 0 2px var(--rose);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .av-tool {
     width: 34px;
     height: 34px;
+<<<<<<< HEAD
     border-radius: var(--radius-sm);
     border: 1px solid var(--glass-border);
     background: rgba(255, 255, 255, 0.05);
     color: var(--text-secondary);
+=======
+    border: 2px solid var(--dark-grey);
+    background: white;
+    color: var(--dark-grey);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -1668,6 +2734,7 @@ body {
 }
 
 .av-tool:hover {
+<<<<<<< HEAD
     background: rgba(255, 255, 255, 0.1);
 }
 
@@ -1679,6 +2746,18 @@ body {
 
 .av-danger:hover {
     background: rgba(239, 68, 68, 0.2);
+=======
+    background: var(--peach);
+}
+
+.av-tool.active {
+    background: var(--rose);
+    color: white;
+}
+
+.av-danger:hover {
+    background: #FEE2E2;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     color: var(--accent-red);
     border-color: var(--accent-red);
 }
@@ -1689,15 +2768,24 @@ body {
     align-items: center;
     margin-left: 4px;
     padding-left: 8px;
+<<<<<<< HEAD
     border-left: 1px solid var(--glass-border);
+=======
+    border-left: 2px solid var(--dark-grey);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
 
 .av-size {
     width: 28px;
     height: 28px;
+<<<<<<< HEAD
     border-radius: var(--radius-sm);
     border: 1px solid var(--glass-border);
     background: rgba(255, 255, 255, 0.05);
+=======
+    border: 2px solid var(--dark-grey);
+    background: white;
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -1706,6 +2794,7 @@ body {
 }
 
 .av-size:hover {
+<<<<<<< HEAD
     background: rgba(255, 255, 255, 0.1);
 }
 
@@ -1716,11 +2805,24 @@ body {
 
 .av-size-dot {
     background: var(--text-secondary);
+=======
+    background: rgba(255, 176, 133, 0.3);
+}
+
+.av-size.active {
+    border-color: var(--rose);
+    background: rgba(242, 120, 159, 0.2);
+}
+
+.av-size-dot {
+    background: var(--mid-grey);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
     border-radius: 50%;
     display: block;
 }
 
 .av-size.active .av-size-dot {
+<<<<<<< HEAD
     background: var(--accent-purple);
 }
 
@@ -1753,4 +2855,7 @@ body {
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
+=======
+    background: var(--rose);
+>>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
 }
