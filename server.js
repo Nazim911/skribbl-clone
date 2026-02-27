@@ -131,6 +131,9 @@ io.on('connection', (socket) => {
         socket.join(code);
         currentRoom = code;
 
+        // If game is in progress, add late joiner into the game
+        const gameInProgress = room.state === 'picking' || room.state === 'drawing' || room.state === 'roundEnd';
+
         socket.emit('roomJoined', {
             code,
             isHost: false,
@@ -142,6 +145,37 @@ io.on('connection', (socket) => {
             player,
             players: room.players
         });
+
+        // Send late joiner the current game state so they jump into the game
+        if (gameInProgress) {
+            // Add to turn order for future turns
+            if (!room.turnOrder.includes(socket.id)) {
+                room.turnOrder.push(socket.id);
+            }
+
+            if (room.state === 'drawing') {
+                const hint = generateHint(room.currentWord, room.revealedPositions);
+                socket.emit('gameState', {
+                    state: 'drawing',
+                    drawerId: room.currentDrawer,
+                    drawerName: room.players.find(p => p.id === room.currentDrawer)?.name,
+                    round: room.currentRound,
+                    totalRounds: room.settings.rounds,
+                    players: room.players,
+                    hint,
+                    timeLeft: room.timeLeft
+                });
+            } else if (room.state === 'picking') {
+                socket.emit('gameState', {
+                    state: 'picking',
+                    drawerId: room.currentDrawer,
+                    drawerName: room.players.find(p => p.id === room.currentDrawer)?.name,
+                    round: room.currentRound,
+                    totalRounds: room.settings.rounds,
+                    players: room.players
+                });
+            }
+        }
     });
 
     // Update Settings
@@ -191,6 +225,10 @@ io.on('connection', (socket) => {
         room.state = 'drawing';
         room.guessedPlayers = new Set();
         room.revealedPositions = new Set();
+
+        // Clear picking countdown
+        clearInterval(room.pickCountdown);
+        room.pickCountdown = null;
 
         // Tell drawer their word
         socket.emit('currentWord', word);
@@ -338,6 +376,7 @@ io.on('connection', (socket) => {
         if (playerIndex === -1) return;
 
         const playerName = room.players[playerIndex].name;
+        const wasDrawing = room.currentDrawer === socket.id;
         room.players.splice(playerIndex, 1);
 
         console.log(`${playerName} disconnected from room ${currentRoom}`);
@@ -346,6 +385,7 @@ io.on('connection', (socket) => {
             // Clean up empty room
             clearInterval(room.turnTimer);
             clearInterval(room.hintInterval);
+            clearInterval(room.pickCountdown);
             delete rooms[currentRoom];
             console.log(`Room ${currentRoom} deleted (empty)`);
             return;
@@ -358,9 +398,43 @@ io.on('connection', (socket) => {
             io.to(room.players[0].id).emit('becameHost');
         }
 
-        // If drawer left, end turn
-        if (room.currentDrawer === socket.id && room.state === 'drawing') {
+        const gameActive = room.state === 'picking' || room.state === 'drawing' || room.state === 'roundEnd';
+
+        // If only 1 player left during an active game, go back to waiting room
+        if (room.players.length === 1 && gameActive) {
+            clearInterval(room.turnTimer);
+            clearInterval(room.hintInterval);
+            clearInterval(room.pickCountdown);
+            room.pickCountdown = null;
+            room.state = 'waiting';
+            room.currentWord = null;
+            room.currentDrawer = null;
+            room.currentRound = 0;
+            room.currentTurnIndex = 0;
+            room.turnOrder = [];
+
+            io.to(currentRoom).emit('backToWaiting', {
+                message: `${playerName} left. Need at least 2 players!`,
+                players: room.players
+            });
+
+            io.to(currentRoom).emit('playerLeft', {
+                playerName,
+                players: room.players
+            });
+            return;
+        }
+
+        // If drawer left during active game, end turn
+        if (wasDrawing && (room.state === 'drawing' || room.state === 'picking')) {
             endTurn(room);
+        }
+
+        // Remove from turn order
+        room.turnOrder = room.turnOrder.filter(id => id !== socket.id);
+        // Adjust turn index if needed
+        if (room.currentTurnIndex >= room.turnOrder.length) {
+            room.currentTurnIndex = 0;
         }
 
         io.to(currentRoom).emit('playerLeft', {
@@ -407,52 +481,63 @@ function startTurn(room) {
         players: room.players
     });
 
-    // Auto-pick word after 15 seconds if drawer doesn't choose
-    room.pickTimeout = setTimeout(() => {
-        if (room.state === 'picking' && room.currentWord === null) {
-            const autoWord = wordChoices[Math.floor(Math.random() * wordChoices.length)];
-            // Simulate word selection
-            const drawerSocket = io.sockets.sockets.get(drawerId);
-            if (drawerSocket) {
-                drawerSocket.emit('wordChoices', []); // close picker
+    // Picking countdown timer (15 seconds)
+    room.pickTimeLeft = 15;
+    io.to(room.code).emit('pickTimer', { timeLeft: room.pickTimeLeft });
+
+    room.pickCountdown = setInterval(() => {
+        room.pickTimeLeft--;
+        io.to(room.code).emit('pickTimer', { timeLeft: room.pickTimeLeft });
+
+        if (room.pickTimeLeft <= 0) {
+            clearInterval(room.pickCountdown);
+            room.pickCountdown = null;
+
+            if (room.state === 'picking' && room.currentWord === null) {
+                const autoWord = wordChoices[Math.floor(Math.random() * wordChoices.length)];
+                const drawerSocket = io.sockets.sockets.get(drawerId);
+                if (drawerSocket) {
+                    drawerSocket.emit('wordChoices', []);
+                }
+                room.currentWord = autoWord.toLowerCase();
+                room.usedWords.add(autoWord.toLowerCase());
+                room.state = 'drawing';
+                room.guessedPlayers = new Set();
+                room.revealedPositions = new Set();
+
+                io.to(drawerId).emit('currentWord', autoWord);
+
+                const hint = generateHint(room.currentWord, room.revealedPositions);
+                io.to(room.code).emit('gameState', {
+                    state: 'drawing',
+                    drawerId: room.currentDrawer,
+                    drawerName: drawer.name,
+                    round: room.currentRound,
+                    totalRounds: room.settings.rounds,
+                    players: room.players,
+                    hint,
+                    timeLeft: room.settings.drawTime
+                });
+
+                room.timeLeft = room.settings.drawTime;
+                room.turnTimer = setInterval(() => {
+                    room.timeLeft--;
+                    io.to(room.code).emit('timer', { timeLeft: room.timeLeft });
+                    if (room.timeLeft <= 0) endTurn(room);
+                }, 1000);
+
+                const hintInterval = Math.max(10, Math.floor(room.settings.drawTime / (Math.ceil(room.currentWord.length * 0.6))));
+                room.hintInterval = setInterval(() => revealLetter(room), hintInterval * 1000);
             }
-            room.currentWord = autoWord.toLowerCase();
-            room.usedWords.add(autoWord.toLowerCase());
-            room.state = 'drawing';
-            room.guessedPlayers = new Set();
-            room.revealedPositions = new Set();
-
-            io.to(drawerId).emit('currentWord', autoWord);
-
-            const hint = generateHint(room.currentWord, room.revealedPositions);
-            io.to(room.code).emit('gameState', {
-                state: 'drawing',
-                drawerId: room.currentDrawer,
-                drawerName: drawer.name,
-                round: room.currentRound,
-                totalRounds: room.settings.rounds,
-                players: room.players,
-                hint,
-                timeLeft: room.settings.drawTime
-            });
-
-            room.timeLeft = room.settings.drawTime;
-            room.turnTimer = setInterval(() => {
-                room.timeLeft--;
-                io.to(room.code).emit('timer', { timeLeft: room.timeLeft });
-                if (room.timeLeft <= 0) endTurn(room);
-            }, 1000);
-
-            const hintInterval = Math.max(10, Math.floor(room.settings.drawTime / (Math.ceil(room.currentWord.length * 0.6))));
-            room.hintInterval = setInterval(() => revealLetter(room), hintInterval * 1000);
         }
-    }, 15000);
+    }, 1000);
 }
 
 function endTurn(room) {
     clearInterval(room.turnTimer);
     clearInterval(room.hintInterval);
-    clearTimeout(room.pickTimeout);
+    clearInterval(room.pickCountdown);
+    room.pickCountdown = null;
 
     const word = room.currentWord || '???';
 

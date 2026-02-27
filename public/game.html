@@ -58,6 +58,7 @@
     <div class="overlay bg-pixel-grid hidden" id="wordPickerOverlay">
         <div class="pixel-border-chunky word-picker-card">
             <h2 class="word-picker-title">CHOOSE A WORD!</h2>
+            <div class="pick-countdown" id="pickCountdownDrawer"></div>
             <div class="word-choices" id="wordChoices"></div>
         </div>
     </div>
@@ -94,6 +95,9 @@
                     </svg>
                     <span class="timer-text" id="timerText"></span>
                 </div>
+                <button class="tool-btn tool-danger" id="btnLeaveGame" title="Leave Game" style="margin-left:8px;">
+                    <span class="material-symbols-outlined" style="font-size:18px;">logout</span>
+                </button>
             </div>
         </div>
 
@@ -112,6 +116,15 @@
                     <div class="canvas-overlay hidden" id="turnEndOverlay">
                         <div class="turn-end-content">
                             <p class="turn-end-word">The word was: <strong id="revealedWord"></strong></p>
+                        </div>
+                    </div>
+                    <!-- Picking info overlay (shown to guessers) -->
+                    <div class="canvas-overlay hidden" id="pickingOverlay">
+                        <div class="picking-info">
+                            <div class="picking-avatar" id="pickingAvatar"></div>
+                            <p class="picking-name" id="pickingName"></p>
+                            <p class="picking-label">IS CHOOSING A WORD</p>
+                            <div class="picking-timer" id="pickingTimer">15</div>
                         </div>
                     </div>
                 </div>

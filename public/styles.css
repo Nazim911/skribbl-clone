@@ -150,6 +150,8 @@ body {
 .avatar-frame {
     width: 100px;
     height: 100px;
+    min-width: 100px;
+    min-height: 100px;
     border: var(--border-size) solid var(--dark-grey);
     background: white;
     display: flex;
@@ -158,6 +160,7 @@ body {
     box-shadow: inset 4px 4px 0px 0px rgba(0, 0, 0, 0.05);
     position: relative;
     overflow: hidden;
+    aspect-ratio: 1;
 }
 
 .avatar-emoji {
@@ -285,8 +288,7 @@ body {
 
 /* Join section */
 .join-section {
-    padding-top: 40px;
-    border-top: 4px dashed var(--light-grey);
+    padding-top: 20px;
 }
 
 .join-section .join-label {
@@ -798,6 +800,28 @@ body {
     font-weight: 700;
 }
 
+/* Winner (1st place) gets bigger podium */
+.podium-winner .podium-avatar {
+    width: 90px;
+    height: 90px;
+    font-size: 2.8rem;
+    border-width: 4px;
+    box-shadow: 6px 6px 0px 0px rgba(255, 215, 0, 0.5);
+}
+
+.podium-winner .podium-name {
+    font-size: 10px;
+    max-width: 100px;
+}
+
+.podium-winner .podium-score {
+    font-size: 10px;
+}
+
+.podium-winner .podium-rank {
+    font-size: 20px;
+}
+
 .podium-rank {
     font-size: 14px;
 }
@@ -896,6 +920,9 @@ body {
 
 .header-right {
     flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
 .timer-circle {
@@ -1070,6 +1097,68 @@ body {
 .turn-end-word strong {
     color: var(--peach);
     font-size: 18px;
+}
+
+/* Picking info overlay (guessers see this while drawer picks) */
+.picking-info {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.picking-avatar {
+    width: 72px;
+    height: 72px;
+    border: 3px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.picking-name {
+    font-size: 14px;
+    color: white;
+    font-weight: 700;
+}
+
+.picking-label {
+    font-size: 10px;
+    color: var(--peach);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.picking-timer {
+    font-size: 28px;
+    color: white;
+    font-weight: 700;
+    animation: timerPulse 1s ease infinite;
+}
+
+@keyframes timerPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* Pick countdown in word picker dialog */
+.pick-countdown {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--rose);
+    text-align: center;
+    margin-bottom: 16px;
 }
 
 /* Toolbar */
