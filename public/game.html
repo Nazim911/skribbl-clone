@@ -4,43 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-    <title>Skribble — Game</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-=======
-    <title>Pixelated — Game</title>
+    <title>Drawzy — Game</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
->>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<<<<<<< HEAD
-<body>
-    <!-- Animated background -->
-    <div class="bg-orbs">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-    </div>
-
-    <!-- ==================== WAITING ROOM OVERLAY ==================== -->
-    <div class="overlay" id="waitingOverlay">
-        <div class="glass-card waiting-card">
-            <h2 class="waiting-title">Waiting Room</h2>
-=======
 <body class="bg-pixel-grid">
 
     <!-- ==================== WAITING ROOM OVERLAY ==================== -->
     <div class="overlay bg-pixel-grid" id="waitingOverlay">
         <div class="pixel-border-chunky waiting-card">
             <h2 class="waiting-title">WAITING ROOM</h2>
->>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
             <div class="room-code-display">
                 <span class="room-code-label">Room Code:</span>
                 <span class="room-code-value" id="waitingRoomCode">------</span>
@@ -66,42 +44,25 @@
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
-            <button class="btn btn-primary btn-start hidden" id="btnStartGame">
-                <span class="btn-icon">🚀</span> Start Game
-=======
             <button class="pixel-button pixel-button-green btn-start hidden" id="btnStartGame">
                 <span style="margin-right:8px;">🚀</span> START GAME
->>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
             </button>
             <p class="waiting-hint" id="waitingHint">Waiting for host to start...</p>
+            <button class="pixel-button pixel-button-red" id="btnExitLobby" style="margin-top:16px; width:100%;">
+                <span class="material-symbols-outlined" style="margin-right:8px;">logout</span> EXIT LOBBY
+            </button>
         </div>
     </div>
 
     <!-- ==================== WORD PICKER OVERLAY ==================== -->
-<<<<<<< HEAD
-    <div class="overlay hidden" id="wordPickerOverlay">
-        <div class="glass-card word-picker-card">
-            <h2 class="word-picker-title">Choose a Word!</h2>
-=======
     <div class="overlay bg-pixel-grid hidden" id="wordPickerOverlay">
         <div class="pixel-border-chunky word-picker-card">
             <h2 class="word-picker-title">CHOOSE A WORD!</h2>
->>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
             <div class="word-choices" id="wordChoices"></div>
         </div>
     </div>
 
     <!-- ==================== GAME OVER OVERLAY ==================== -->
-<<<<<<< HEAD
-    <div class="overlay hidden" id="gameOverOverlay">
-        <div class="glass-card gameover-card">
-            <h2 class="gameover-title">🏆 Game Over!</h2>
-            <div class="podium" id="podium"></div>
-            <div class="rankings-list" id="rankingsList"></div>
-            <button class="btn btn-primary" id="btnPlayAgain">
-                <span class="btn-icon">🔄</span> Play Again
-=======
     <div class="overlay bg-pixel-grid hidden" id="gameOverOverlay">
         <div class="pixel-border-chunky gameover-card">
             <h2 class="gameover-title">🏆 GAME OVER!</h2>
@@ -109,7 +70,6 @@
             <div class="rankings-list" id="rankingsList"></div>
             <button class="pixel-button" id="btnPlayAgain">
                 <span style="margin-right:8px;">🔄</span> PLAY AGAIN
->>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
             </button>
         </div>
     </div>
@@ -173,11 +133,7 @@
                             <button class="palette-color" data-color="#6600CC" style="background:#6600CC"></button>
                             <button class="palette-color" data-color="#CC00CC" style="background:#CC00CC"></button>
                             <button class="palette-color" data-color="#FFFFFF"
-<<<<<<< HEAD
-                                style="background:#FFFFFF; border:1px solid #444"></button>
-=======
                                 style="background:#FFFFFF; border-color:#aaa"></button>
->>>>>>> 2ed3c36 (new layout,new features added and theme few bug fixes)
                             <button class="palette-color" data-color="#C0C0C0" style="background:#C0C0C0"></button>
                             <button class="palette-color" data-color="#804000" style="background:#804000"></button>
                             <button class="palette-color" data-color="#FF6666" style="background:#FF6666"></button>
